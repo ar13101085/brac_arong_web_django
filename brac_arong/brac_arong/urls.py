@@ -16,6 +16,9 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 
+import aarong.views
+
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^aarong/getAllProduct$', aarong.views.GetAllProduct,name="all_product"),
 ]
