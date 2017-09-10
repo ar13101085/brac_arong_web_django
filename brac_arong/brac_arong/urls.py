@@ -15,10 +15,17 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
+from django.conf import settings
+from django.conf.urls.static import static
 
 import aarong.views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^aarong/getAllProduct$', aarong.views.GetAllProduct,name="all_product"),
+    url(r'^getAllProduct$', aarong.views.GetAllProduct,name="all_product"),
+    url(r'^AddShop', aarong.views.AddShop,name="AddShop"),
+    url(r'^GetAllRoute', aarong.views.GetAllRoute,name="GetAllRoute"),
+    url(r'^GetAllShopInRoute', aarong.views.GetAllShopInRoute,name="GetAllShopInRoute"),
 ]
+urlpatterns +=static(settings.STATIC_URL,document_root=settings.STATIC_ROOT)
+urlpatterns +=static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
