@@ -26,6 +26,7 @@ urlpatterns = [
     url(r'^AddShop', aarong.views.AddShop,name="AddShop"),
     url(r'^GetAllRoute', aarong.views.GetAllRoute,name="GetAllRoute"),
     url(r'^GetAllShopInRoute', aarong.views.GetAllShopInRoute,name="GetAllShopInRoute"),
+    url(r'^SaleAdd', aarong.views.SaleAdd,name="GetAllShopInRoute"),
 ]
 urlpatterns +=static(settings.STATIC_URL,document_root=settings.STATIC_ROOT)
 urlpatterns +=static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

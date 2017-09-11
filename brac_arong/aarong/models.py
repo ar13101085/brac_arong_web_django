@@ -51,8 +51,6 @@ class Order(models.Model):
     OrderCreatedTime = models.DateTimeField(auto_now_add=True, blank=True);
     PaymentTaka=models.FloatField(default=0.0);
     Due=models.FloatField(default=0.0);
-
-    IsSale=models.BooleanField(default=False);
     User=models.ForeignKey(User,blank=False)
     #All sale
 

@@ -31,23 +31,49 @@ def GetAllRoute(request):
     return HttpResponse(json.dumps(routes), content_type='json');
 
 def GetAllProduct(request):
-    productList = Product.objects.all().select_related();
-    productData = [];
-    for data in productList:
-        x = {};
-        x['ProductId'] = data.ProductId;
-        x['ProductName'] = data.ProductName;
-        x['ProductUnitPrice'] = data.ProductUnitPrice;
-        if data.ProductPhoto:
-            x['ProductPhoto'] = data.ProductPhoto.url;
+    # productList = Product.objects.all().select_related();
+    # productData = [];
+    # for data in productList:
+    #     x = {};
+    #     x['ProductId'] = data.ProductId;
+    #     x['ProductName'] = data.ProductName;
+    #     x['ProductUnitPrice'] = data.ProductUnitPrice;
+    #     if data.ProductPhoto:
+    #         x['ProductPhoto'] = data.ProductPhoto.url;
+    #     else:
+    #         x['ProductPhoto'] = '';
+    #     x['category'] = {};
+    #     category = Category.objects.get(pk=data.Category_id);
+    #     x['category'] = {'id': category.CategoryId, 'name': category.CategoryName};
+    #     productData.append(x)
+    # return HttpResponse(json.dumps(productData), content_type='json');
+    shopId=request.GET.get('shopId');# next time use for suggetion product
+    print("shop id is "+str(shopId));
+    allCategory=Category.objects.all();
+    all=[];
+    for x in allCategory:
+        data={};
+        data['CategoryId']=x.CategoryId;
+        data['CategoryName']=x.CategoryName;
+        if x.CategoryPhoto:
+            data['CategoryPhoto']=x.CategoryPhoto.url;
         else:
-            x['ProductPhoto'] = '';
-        x['category'] = {};
-        category = Category.objects.get(pk=data.Category_id);
-        x['category'] = {'id': category.CategoryId, 'name': category.CategoryName};
-        productData.append(x)
-    return HttpResponse(json.dumps(productData), content_type='json');
+            data['CategoryPhoto']='';
+        data['ProductList']=[];
+        categoryProduct=Product.objects.filter(Category=x).all();
+        for y in categoryProduct:
+            product={};
+            product['ProductId']=y.ProductId;
+            product['ProductName']=y.ProductName;
+            product['ProductUnitPrice']=y.ProductUnitPrice;
+            if y.ProductPhoto:
+                product['ProductPhoto']=y.ProductPhoto.url;
+            else:
+                product['ProductPhoto']='';
+            data['ProductList'].append(product);
+        all.append(data);
 
+    return HttpResponse(json.dumps(all), content_type='json');
 @csrf_exempt
 def AddShop(request):
     route = Route.objects.get(pk=request.POST['RouteId']);
@@ -65,3 +91,7 @@ def AddShop(request):
     else:
         res = {'res': False, 'msg': 'no route id found', 'shop': {}};
         return HttpResponse(json.dumps(res), content_type='json');
+@csrf_exempt
+def SaleAdd(request):
+    print(json.loads(str(request.POST.getlist('Sales'))));
+    return HttpResponse(json.dumps({}), content_type='json');
