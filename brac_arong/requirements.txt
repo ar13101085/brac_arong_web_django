@@ -1,0 +1,8 @@
+beautifulsoup4==4.6.0
+cssutils==1.0.2
+Django==1.11.4
+olefile==0.44
+Pillow==4.2.1
+pytz==2017.2
+selenium==3.5.0
+splinter==0.7.6
