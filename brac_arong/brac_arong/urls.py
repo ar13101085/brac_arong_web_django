@@ -13,11 +13,11 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url
+from django.conf.urls import url, include
 from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
-
+from rest_framework.authtoken import views as rest_framework_views
 import aarong.views
 
 urlpatterns = [
@@ -27,6 +27,8 @@ urlpatterns = [
     url(r'^GetAllRoute', aarong.views.GetAllRoute,name="GetAllRoute"),
     url(r'^GetAllShopInRoute', aarong.views.GetAllShopInRoute,name="GetAllShopInRoute"),
     url(r'^SaleAdd', aarong.views.SaleAdd,name="GetAllShopInRoute"),
+    url(r'^GetToken', aarong.views.GetToken,name="GetToken"),
+    url(r'^get_auth_token/$', rest_framework_views.obtain_auth_token, name='get_auth_token'),
 ]
 urlpatterns +=static(settings.STATIC_URL,document_root=settings.STATIC_ROOT)
 urlpatterns +=static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

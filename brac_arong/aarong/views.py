@@ -1,12 +1,17 @@
 import json
 
+from django.contrib.auth.models import User
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.core import serializers
 from django.views.decorators.csrf import csrf_exempt
 from django.forms.models import model_to_dict
+from rest_framework import permissions
+from rest_framework.authtoken.models import Token
+from rest_framework.decorators import permission_classes
+from rest_framework.permissions import IsAuthenticated
 
-from aarong.models import Product, Category, Shop, Route
+from aarong.models import Product, Category, Shop, Route, Sale, SaleProductList
 
 
 def GetAllShopInRoute(request):
@@ -92,6 +97,46 @@ def AddShop(request):
         res = {'res': False, 'msg': 'no route id found', 'shop': {}};
         return HttpResponse(json.dumps(res), content_type='json');
 @csrf_exempt
+@permission_classes((IsAuthenticated,))
 def SaleAdd(request):
-    print(json.loads(str(request.POST.getlist('Sales'))));
-    return HttpResponse(json.dumps({}), content_type='json');
+    shop = Shop.objects.get(pk=request.POST['shopId']);
+    user=User.objects.get(pk=request.POST['user_id'])
+    total=request.POST['total'];
+
+    sale=Sale(Shop=shop,Total=total,User=user);
+    sale.save();
+
+
+    saleInfo=json.loads(request.POST['sale']);
+    for x in saleInfo:
+        print(x)
+
+        product=Product.objects.get(pk=x['productId'])
+        saleQuantity=x['saleQuantity'];
+        saleMoney=x['totalPrice'];
+
+        saleProductList=SaleProductList(Product=product,Sale=sale,saleQuantity=saleQuantity,saleMoney=saleMoney);
+        saleProductList.save();
+
+    saveData=model_to_dict(sale);
+    saveData['res']=True;
+    return HttpResponse(json.dumps(saveData), content_type='json');
+@csrf_exempt
+def GetToken(request):
+    #print("user is "+str(request.user.is_authenticated()))
+    user=User.objects.filter(username=request.POST['user_name']).first();
+    if user and (user.check_password(request.POST['password'])):
+        token = Token.objects.get(user=user)
+        if token:
+            pass;
+        else:
+            token = Token.objects.create(user=user)
+        data = model_to_dict(token);
+        data['res']=True;
+        return HttpResponse(json.dumps(data), content_type='json');
+    else:
+        data={};
+        data['res']=False;
+        return HttpResponse(json.dumps(data), content_type='json');
+
+    #return HttpResponse(json.dumps(token), content_type='json');

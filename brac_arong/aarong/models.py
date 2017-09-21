@@ -45,26 +45,21 @@ class Shop(models.Model):
     def __str__(self):
         return str(self.ShopId)+" "+self.ShopProviderName;
 
-class Order(models.Model):
-    OrderId = models.AutoField(primary_key=True);
-    Shop=models.ForeignKey(Shop);
-    OrderCreatedTime = models.DateTimeField(auto_now_add=True, blank=True);
-    PaymentTaka=models.FloatField(default=0.0);
-    Due=models.FloatField(default=0.0);
-    User=models.ForeignKey(User,blank=False)
-    #All sale
-
-    def __str__(self):
-        return str(self.OrderId);
 
 class Sale(models.Model):
     SaleId = models.AutoField(primary_key=True);
-    Order=models.ForeignKey(Order,blank=False)
-    Product=models.OneToOneField(Product,default=None)
-    saleQuantity=models.IntegerField(default=0);
-    saleMoney=models.FloatField(default=0.0);
+    Shop = models.ForeignKey(Shop,blank=False,default=None);
+    OrderCreatedTime = models.DateTimeField(auto_now_add=True, blank=True);
+    Total = models.FloatField(default=0.0);
+    User = models.ForeignKey(User, blank=False,default=None)
+
     def __str__(self):
-        return str(self.SaleId)+" "+self.Product.ProductName;
+        return str(self.SaleId)+" "+str(self.Shop.ShopProviderName);
 
-
+class SaleProductList(models.Model):
+    id=models.AutoField(primary_key=True);
+    Product = models.ForeignKey(Product, default=None)
+    Sale=models.ForeignKey(Sale,default=None);
+    saleQuantity = models.IntegerField(default=0);
+    saleMoney=models.FloatField(default=0.0);
 
