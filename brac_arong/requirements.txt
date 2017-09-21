@@ -1,6 +1,9 @@
 beautifulsoup4==4.6.0
 cssutils==1.0.2
 Django==1.11.4
+django-filter==1.0.4
+djangorestframework==3.6.4
+Markdown==2.6.9
 olefile==0.44
 Pillow==4.2.1
 pytz==2017.2
