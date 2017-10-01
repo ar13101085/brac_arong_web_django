@@ -63,3 +63,25 @@ class SaleProductList(models.Model):
     saleQuantity = models.IntegerField(default=0);
     saleMoney=models.FloatField(default=0.0);
 
+class OtherVendor(models.Model):
+    id = models.AutoField(primary_key=True);
+    name=models.CharField(max_length=100,default='');
+    def __str__(self):
+        return str(self.id)+" "+self.name;
+class OtherVendorSaleProduct(models.Model):
+    id = models.AutoField(primary_key=True);
+    Product = models.ForeignKey(Product, default=None)
+    CreatedTime = models.DateTimeField(auto_now_add=True, blank=True);
+    saleQuantity = models.IntegerField(default=0);
+    saleMoney = models.FloatField(default=0.0);
+    VendorName=models.ForeignKey(OtherVendor,blank=False);
+    def __str__(self):
+        return str(self.id)+" "+self.Product.Category.CategoryName+" "+self.Product.ProductName;
+
+class Notification(models.Model):
+    id = models.AutoField(primary_key=True);
+    title=models.TextField(default="");
+    text=models.TextField(default="");
+    CreatedTime = models.DateTimeField(auto_now_add=True, blank=True);
+    def __str__(self):
+        return str(self.id)+" "+self.title;

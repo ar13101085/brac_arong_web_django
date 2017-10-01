@@ -29,6 +29,7 @@ urlpatterns = [
     url(r'^SaleAdd', aarong.views.SaleAdd,name="GetAllShopInRoute"),
     url(r'^GetToken', aarong.views.GetToken,name="GetToken"),
     url(r'^get_auth_token/$', rest_framework_views.obtain_auth_token, name='get_auth_token'),
+    url(r'^home/$', aarong.views.figure, name='home'),
 ]
 urlpatterns +=static(settings.STATIC_URL,document_root=settings.STATIC_ROOT)
 urlpatterns +=static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

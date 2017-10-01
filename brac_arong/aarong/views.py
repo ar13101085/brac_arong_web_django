@@ -1,12 +1,15 @@
 import json
 
+import matplotlib.pyplot as plt;
+import mpld3
+import numpy as np
+import pandas as pd;
 from django.contrib.auth.models import User
-from django.http import HttpResponse
-from django.shortcuts import render
-from django.core import serializers
-from django.views.decorators.csrf import csrf_exempt
 from django.forms.models import model_to_dict
-from rest_framework import permissions
+from django.http import HttpResponse
+# Create your views here.
+from django.shortcuts import render
+from django.views.decorators.csrf import csrf_exempt
 from rest_framework.authtoken.models import Token
 from rest_framework.decorators import permission_classes
 from rest_framework.permissions import IsAuthenticated
@@ -140,3 +143,30 @@ def GetToken(request):
         return HttpResponse(json.dumps(data), content_type='json');
 
     #return HttpResponse(json.dumps(token), content_type='json');
+
+
+def figure(request):
+
+    np.random.seed(9615)
+
+    N = 100
+    df = pd.DataFrame((.1 * (np.random.random((N, 5)) - .5)).cumsum(0),
+                  columns=['a', 'b', 'c', 'd', 'e'], )
+
+    # plot line + confidence interval
+    fig, ax = plt.subplots()
+    ax.grid(True, alpha=0.3)
+
+    for key, val in df.iteritems():
+        l, = ax.plot(val.index, val.values, label=key)
+        ax.fill_between(val.index,
+                        val.values * .5, val.values * 1.5,
+                        color=l.get_color(), alpha=.4)
+    ax.set_xlabel('x')
+    ax.set_ylabel('y')
+    ax.set_title('Interactive legend', size=20)
+
+    html_fig = mpld3.fig_to_html(fig,template_type='general')
+    plt.close(fig)
+
+    return render(request, "app/index.html", {'active_page' : 'dashboard.html', 'div_figure' : html_fig})
