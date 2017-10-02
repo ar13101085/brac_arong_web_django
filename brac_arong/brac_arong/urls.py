@@ -19,6 +19,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from rest_framework.authtoken import views as rest_framework_views
 import aarong.views
+from aarong import views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -30,6 +31,10 @@ urlpatterns = [
     url(r'^GetToken', aarong.views.GetToken,name="GetToken"),
     url(r'^get_auth_token/$', rest_framework_views.obtain_auth_token, name='get_auth_token'),
     url(r'^home/$', aarong.views.figure, name='home'),
+    url(r'^login/$', aarong.views.login, name='login'),
+
+    url(r'^.*\.html', views.gentella_html, name='gentella'),
+    url(r'^$', views.index, name='index'),
 ]
 urlpatterns +=static(settings.STATIC_URL,document_root=settings.STATIC_ROOT)
 urlpatterns +=static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

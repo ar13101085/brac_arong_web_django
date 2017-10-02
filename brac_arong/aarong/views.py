@@ -1,14 +1,17 @@
 import json
 
+import datetime;
 import matplotlib.pyplot as plt;
 import mpld3
 import numpy as np
 import pandas as pd;
+from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
 from django.forms.models import model_to_dict
 from django.http import HttpResponse
 # Create your views here.
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.template import loader
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.authtoken.models import Token
 from rest_framework.decorators import permission_classes
@@ -170,3 +173,39 @@ def figure(request):
     plt.close(fig)
 
     return render(request, "app/index.html", {'active_page' : 'dashboard.html', 'div_figure' : html_fig})
+
+def login(request):
+    failed=False;
+    if request.user.is_authenticated():
+        return redirect('/home');
+
+    currentDateTime=datetime.datetime.now().strftime('%Y');
+    if request.method=='POST':
+        user = authenticate(request,username=request.POST['username'], password=request.POST['password'])
+        if user is not None:
+            return redirect('/home');
+        else:
+            failed=True;
+            template = loader.get_template('app/login.html')
+            return HttpResponse(template.render({'year': currentDateTime,'failed':failed}, request));
+    elif request.method=='GET':
+        template = loader.get_template('app/login.html')
+        return HttpResponse(template.render({'year':currentDateTime,'failed':failed}, request))
+
+
+
+def index(request):
+    context = {}
+    template = loader.get_template('app/index.html')
+    return HttpResponse(template.render(context, request))
+
+
+def gentella_html(request):
+    context = {}
+    # The template to be loaded as per gentelella.
+    # All resource paths for gentelella end in .html.
+
+    # Pick out the html file name from the url. And load that template.
+    load_template = request.path.split('/')[-1]
+    template = loader.get_template('app/' + load_template)
+    return HttpResponse(template.render(context, request))
