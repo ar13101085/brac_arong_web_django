@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt;
 import mpld3
 import numpy as np
 import pandas as pd;
+from django.contrib import auth
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
 from django.forms.models import model_to_dict
@@ -150,6 +151,9 @@ def GetToken(request):
 
 def figure(request):
 
+    if request.user.is_authenticated() is not True:
+        return redirect('/login');
+
     np.random.seed(9615)
 
     N = 100
@@ -183,6 +187,7 @@ def login(request):
     if request.method=='POST':
         user = authenticate(request,username=request.POST['username'], password=request.POST['password'])
         if user is not None:
+            auth.login(request=request,user=user);
             return redirect('/home');
         else:
             failed=True;
@@ -195,12 +200,17 @@ def login(request):
 
 
 def index(request):
-    context = {}
-    template = loader.get_template('app/index.html')
-    return HttpResponse(template.render(context, request))
+    if request.user.is_authenticated() is not True:
+        return redirect('/login');
+    # context = {}
+    # template = loader.get_template('app/index.html')
+    # return HttpResponse(template.render(context, request))
+    return redirect('/home');
 
 
 def gentella_html(request):
+    if request.user.is_authenticated() is not True:
+        return redirect('/login');
     context = {}
     # The template to be loaded as per gentelella.
     # All resource paths for gentelella end in .html.
