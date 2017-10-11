@@ -3,6 +3,12 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 
+class AppUser(models.Model):
+    user=models.OneToOneField(User);
+    picture=models.ImageField();
+    def __str__(self):
+        return self.user.email;
+
 
 class Category(models.Model):
     CategoryId = models.AutoField(primary_key=True);

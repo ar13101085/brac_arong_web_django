@@ -2,6 +2,8 @@ import json
 
 import datetime;
 import matplotlib.pyplot as plt;
+import matplotlib;
+#matplotlib.use("Agg");
 import mpld3
 import numpy as np
 import pandas as pd;
