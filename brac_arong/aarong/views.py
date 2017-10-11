@@ -176,6 +176,7 @@ def figure(request):
 
 def login(request):
     failed=False;
+
     if request.user.is_authenticated():
         return redirect('/home');
 
@@ -209,3 +210,9 @@ def gentella_html(request):
     load_template = request.path.split('/')[-1]
     template = loader.get_template('app/' + load_template)
     return HttpResponse(template.render(context, request))
+
+
+
+
+
+

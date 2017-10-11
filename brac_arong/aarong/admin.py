@@ -7,6 +7,10 @@ from aarong.models import Route
 from aarong.models import Sale
 from aarong.models import Shop
 
+class OtherVendorSaleProductAdmin(admin.ModelAdmin):
+    list_display=('id','Category','CreatedTime','Unit','saleMoney','VendorName');
+
+
 admin.site.register(Route)
 admin.site.register(Shop)
 admin.site.register(Sale)
@@ -16,5 +20,5 @@ admin.site.register(SaleProductList)
 
 
 admin.site.register(OtherVendor)
-admin.site.register(OtherVendorSaleProduct)
+admin.site.register(OtherVendorSaleProduct,OtherVendorSaleProductAdmin)
 admin.site.register(Notification)

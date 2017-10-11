@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 
 # Create your models here.
+from django.utils.timezone import now
 
 
 class Category(models.Model):
@@ -70,13 +71,13 @@ class OtherVendor(models.Model):
         return str(self.id)+" "+self.name;
 class OtherVendorSaleProduct(models.Model):
     id = models.AutoField(primary_key=True);
-    Product = models.ForeignKey(Product, default=None)
-    CreatedTime = models.DateTimeField(auto_now_add=True, blank=True);
-    saleQuantity = models.IntegerField(default=0);
+    Category = models.ForeignKey(Category)
+    CreatedTime = models.DateField(default=now);
+    Unit = models.IntegerField(default=0);
     saleMoney = models.FloatField(default=0.0);
     VendorName=models.ForeignKey(OtherVendor,blank=False);
     def __str__(self):
-        return str(self.id)+" "+self.Product.Category.CategoryName+" "+self.Product.ProductName;
+        return str(self.id)+" "+self.Category.CategoryName;
 
 class Notification(models.Model):
     id = models.AutoField(primary_key=True);
