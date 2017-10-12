@@ -54,11 +54,11 @@
             <!-- {{ content }} -->
           {% endblock content %}
 
-          {% block footer %}
+          {% comment %}{% block footer %}
             <footer>
               {% include "app/footer.html" %}
             </footer>
-          {% endblock footer %}
+          {% endblock footer %}{% endcomment %}
         </div>
       </div>
 

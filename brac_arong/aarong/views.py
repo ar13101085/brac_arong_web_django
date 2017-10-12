@@ -10,6 +10,7 @@ import pandas as pd;
 from django.contrib import auth
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
+from django.db.models import Sum
 from django.forms.models import model_to_dict
 from django.http import HttpResponse
 # Create your views here.
@@ -20,7 +21,7 @@ from rest_framework.authtoken.models import Token
 from rest_framework.decorators import permission_classes
 from rest_framework.permissions import IsAuthenticated
 
-from aarong.models import Product, Category, Shop, Route, Sale, SaleProductList
+from aarong.models import Product, Category, Shop, Route, Sale, SaleProductList, OtherVendor, NiceColor
 
 
 def GetAllShopInRoute(request):
@@ -223,8 +224,98 @@ def gentella_html(request):
     template = loader.get_template('app/' + load_template)
     return HttpResponse(template.render(context, request))
 
+def home(request):
+    return render(request, "app/index.html", {'active_page': 'dashboard.html'});
 
 
+def GetMarketAnalysis(request):
+    otherVendor=OtherVendor.objects.prefetch_related("other_vendor");
+    name=[];
+    taka=[];
+    for x in otherVendor:
+        list=[];
+        name.append(x.name);
+        money=x.other_vendor.all().aggregate(Sum('saleMoney'))['saleMoney__sum'];
+        if money:
+            taka.append(money);
+        else:
+            taka.append(0);
 
+    aarongSell=SaleProductList.objects.all().aggregate(Sum('saleMoney'))['saleMoney__sum'];
+    name.append("Aarong");
+    taka.append(aarongSell);
+    colorData=[];
+    color=NiceColor.objects.all();
+    for x in color:
+        colorData.append(x.code);
+    data={};
+    data['name']=name;
+    data['money']=taka;
+    data['color']=colorData;
+    return HttpResponse(json.dumps(data), content_type='json');
 
+def GetMarketProductAnalysis(request):
+    category=Category.objects.prefetch_related("category_name");
+    name=[];
+    taka=[];
+    for x in category:
+        list=[];
+        name.append(x.CategoryName);
+        money=x.category_name.all().aggregate(Sum('saleMoney'))['saleMoney__sum'];
+        if money:
+            taka.append(money);
+        else:
+            taka.append(0);
 
+    aarongSell=SaleProductList.objects.all().aggregate(Sum('saleMoney'))['saleMoney__sum'];
+    name.append("Aarong");
+    taka.append(aarongSell);
+    colorData=[];
+    color=NiceColor.objects.all();
+    for x in color:
+        colorData.append(x.code);
+    data={};
+    data['name']=name;
+    data['money']=taka;
+    data['color']=colorData;
+    #data={};
+    return HttpResponse(json.dumps(data), content_type='json');
+
+def AllProductReport(request):
+    allProduct=Product.objects.all();
+    name = [];
+    taka = [];
+    for a in allProduct:
+        name.append(a.Category.CategoryName+" "+a.ProductName);
+        sumData=SaleProductList.objects.filter(Product=a).all().aggregate(Sum('saleMoney'))['saleMoney__sum'];
+        if sumData is None:
+            sumData=0;
+        taka.append(sumData);
+    colorData = [];
+    color = NiceColor.objects.all();
+    for x in color:
+        colorData.append(x.code);
+    data = {};
+    data['name'] = name;
+    data['money'] = taka;
+    data['color'] = colorData;
+    return HttpResponse(json.dumps(data), content_type='json');
+def AllProductReport(request):
+    allProduct=Product.objects.all();
+    name = [];
+    taka = [];
+    for a in allProduct:
+        name.append(a.Category.CategoryName+" "+a.ProductName);
+        sumData=SaleProductList.objects.filter(Product=a).all().aggregate(Sum('saleMoney'))['saleMoney__sum'];
+        if sumData is None:
+            sumData=0;
+        taka.append(sumData);
+    colorData = [];
+    color = NiceColor.objects.all();
+    for x in color:
+        colorData.append(x.code);
+    data = {};
+    data['name'] = name;
+    data['money'] = taka;
+    data['color'] = colorData;
+    return HttpResponse(json.dumps(data), content_type='json');

@@ -69,6 +69,8 @@ class SaleProductList(models.Model):
     Sale=models.ForeignKey(Sale,default=None);
     saleQuantity = models.IntegerField(default=0);
     saleMoney=models.FloatField(default=0.0);
+    def __str__(self):
+        return self.Product.ProductName+" "+str(self.saleMoney);
 
 class OtherVendor(models.Model):
     id = models.AutoField(primary_key=True);
@@ -77,13 +79,13 @@ class OtherVendor(models.Model):
         return str(self.id)+" "+self.name;
 class OtherVendorSaleProduct(models.Model):
     id = models.AutoField(primary_key=True);
-    Category = models.ForeignKey(Category)
+    Category = models.ForeignKey(Category,related_name="category_name")
     CreatedTime = models.DateField(default=now);
     Unit = models.IntegerField(default=0);
     saleMoney = models.FloatField(default=0.0);
-    VendorName=models.ForeignKey(OtherVendor,blank=False);
+    VendorName=models.ForeignKey(OtherVendor,blank=False,related_name="other_vendor");
     def __str__(self):
-        return str(self.id)+" "+self.Category.CategoryName;
+        return str(self.id)+" "+self.Category.CategoryName+" "+str(self.CreatedTime);
 
 class Notification(models.Model):
     id = models.AutoField(primary_key=True);
@@ -92,3 +94,8 @@ class Notification(models.Model):
     CreatedTime = models.DateTimeField(auto_now_add=True, blank=True);
     def __str__(self):
         return str(self.id)+" "+self.title;
+class NiceColor(models.Model):
+    id=models.AutoField(primary_key=True);
+    code=models.CharField(max_length=10);
+    def __str__(self):
+        return str(self.id)+"       "+self.code;

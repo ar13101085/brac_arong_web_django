@@ -30,9 +30,11 @@ urlpatterns = [
     url(r'^SaleAdd', aarong.views.SaleAdd,name="GetAllShopInRoute"),
     url(r'^GetToken', aarong.views.GetToken,name="GetToken"),
     url(r'^get_auth_token/$', rest_framework_views.obtain_auth_token, name='get_auth_token'),
-    url(r'^home/$', aarong.views.figure, name='home'),
+    url(r'^home/$', aarong.views.home, name='home'),
     url(r'^login/$', aarong.views.login, name='login'),
-
+    url(r'^GetMarketAnalysis/$', aarong.views.GetMarketAnalysis, name='GetMarketAnalysis'),
+    url(r'^GetMarketProductAnalysis/$', aarong.views.GetMarketProductAnalysis, name='GetMarketProductAnalysis'),
+    url(r'^AllProductReport/$', aarong.views.AllProductReport, name='AllProductReport'),
     url(r'^.*\.html', views.gentella_html, name='gentella'),
     url(r'^$', views.index, name='index'),
 ]
