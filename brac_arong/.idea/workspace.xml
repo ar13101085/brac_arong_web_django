@@ -6,24 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="5b6e1b93-2bf8-45ba-b474-2864a8823e92" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db.sqlite3" afterPath="$PROJECT_DIR$/db.sqlite3" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/brac_arong.iml" afterPath="$PROJECT_DIR$/.idea/brac_arong.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/aarong/admin.py" afterPath="$PROJECT_DIR$/aarong/admin.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/aarong/models.py" afterPath="$PROJECT_DIR$/aarong/models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/aarong/templates/app/BracAllProduct.html" afterPath="$PROJECT_DIR$/aarong/templates/app/BracAllProduct.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/aarong/templates/app/MarketProduct.html" afterPath="$PROJECT_DIR$/aarong/templates/app/MarketProduct.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/aarong/templates/app/base_site.html" afterPath="$PROJECT_DIR$/aarong/templates/app/base_site.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/aarong/templates/app/footer.html" afterPath="$PROJECT_DIR$/aarong/templates/app/footer.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/aarong/templates/app/form_advanced.html" afterPath="$PROJECT_DIR$/aarong/templates/app/form_advanced.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/aarong/templates/app/index.html" afterPath="$PROJECT_DIR$/aarong/templates/app/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/aarong/templates/app/sidebar.html" afterPath="$PROJECT_DIR$/aarong/templates/app/sidebar.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/aarong/templates/app/top_navigation.html" afterPath="$PROJECT_DIR$/aarong/templates/app/top_navigation.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/aarong/views.py" afterPath="$PROJECT_DIR$/aarong/views.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/brac_arong/settings.py" afterPath="$PROJECT_DIR$/brac_arong/settings.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/brac_arong/urls.py" afterPath="$PROJECT_DIR$/brac_arong/urls.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/requirements.txt" afterPath="$PROJECT_DIR$/requirements.txt" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -70,7 +54,7 @@
       <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/aarong/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="8">
+            <state relative-caret-position="1156">
               <caret line="72" column="64" lean-forward="false" selection-start-line="72" selection-start-column="64" selection-end-line="72" selection-end-column="64" />
               <folding>
                 <element signature="e#0#28#0" expanded="true" />
@@ -79,11 +63,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="settings.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="settings.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/brac_arong/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1216">
-              <caret line="37" column="30" lean-forward="false" selection-start-line="37" selection-start-column="30" selection-end-line="37" selection-end-column="30" />
+            <state relative-caret-position="195">
+              <caret line="16" column="0" lean-forward="true" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -92,7 +76,7 @@
       <file leaf-file-name="admin.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/aarong/admin.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="442">
+            <state relative-caret-position="306">
               <caret line="26" column="24" lean-forward="false" selection-start-line="26" selection-start-column="24" selection-end-line="26" selection-end-column="24" />
               <folding>
                 <element signature="e#0#32#0" expanded="true" />
@@ -101,7 +85,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/aarong/views.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="85">
@@ -114,7 +98,7 @@
       <file leaf-file-name="AarongSaleReportAll.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/aarong/templates/app/AarongSaleReportAll.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1913">
+            <state relative-caret-position="0">
               <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
@@ -124,7 +108,7 @@
       <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/brac_arong/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="382">
+            <state relative-caret-position="493">
               <caret line="35" column="35" lean-forward="false" selection-start-line="35" selection-start-column="11" selection-end-line="35" selection-end-column="35" />
               <folding>
                 <element signature="e#644#685#0" expanded="true" />
@@ -162,13 +146,13 @@
         <option value="$PROJECT_DIR$/aarong/templates/app/top_navigation.html" />
         <option value="$PROJECT_DIR$/aarong/templates/app/index.html" />
         <option value="$PROJECT_DIR$/aarong/templates/app/MarketProduct.html" />
-        <option value="$PROJECT_DIR$/brac_arong/settings.py" />
         <option value="$PROJECT_DIR$/aarong/templates/app/form_advanced.html" />
         <option value="$PROJECT_DIR$/brac_arong/urls.py" />
         <option value="$PROJECT_DIR$/aarong/templates/app/sidebar.html" />
         <option value="$PROJECT_DIR$/aarong/models.py" />
         <option value="$PROJECT_DIR$/aarong/templates/app/BracAllProduct.html" />
         <option value="$PROJECT_DIR$/aarong/views.py" />
+        <option value="$PROJECT_DIR$/brac_arong/settings.py" />
       </list>
     </option>
   </component>
@@ -209,6 +193,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -269,7 +254,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="Scratches" />
     </panes>
   </component>
@@ -312,8 +296,7 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="brac_arong" />
       <option name="launchJavascriptDebuger" value="false" />
-      <option name="port" value="8588" />
-      <option name="host" value="192.168.0.101" />
+      <option name="host" value="" />
       <option name="additionalOptions" value="" />
       <option name="browserUrl" value="" />
       <option name="runTestServer" value="false" />
@@ -359,7 +342,7 @@
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14232409" sideWeight="0.4945055" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14552239" sideWeight="0.4945055" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3288889" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18123667" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -638,7 +621,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
           <caret line="9" column="50" lean-forward="false" selection-start-line="9" selection-start-column="20" selection-end-line="9" selection-end-column="50" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -646,9 +628,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="435">
           <caret line="473" column="32" lean-forward="true" selection-start-line="473" selection-start-column="32" selection-end-line="473" selection-end-column="32" />
-          <folding>
-            <element signature="n#div#1;n#div#0;n#div#3;n#div#0;n#div#0;n#!!top" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -656,13 +635,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="510">
           <caret line="135" column="13" lean-forward="false" selection-start-line="135" selection-start-column="13" selection-end-line="135" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/brac_arong/urls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="382">
+        <state relative-caret-position="493">
           <caret line="35" column="35" lean-forward="false" selection-start-line="35" selection-start-column="11" selection-end-line="35" selection-end-column="35" />
           <folding>
             <element signature="e#644#685#0" expanded="true" />
@@ -672,7 +650,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/aarong/admin.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
+        <state relative-caret-position="306">
           <caret line="26" column="24" lean-forward="false" selection-start-line="26" selection-start-column="24" selection-end-line="26" selection-end-column="24" />
           <folding>
             <element signature="e#0#32#0" expanded="true" />
@@ -684,10 +662,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="263">
           <caret line="37" column="65" lean-forward="true" selection-start-line="37" selection-start-column="47" selection-end-line="37" selection-end-column="65" />
-          <folding>
-            <marker date="1507791017087" expanded="false" signature="2263:2536" ph="..." />
-            <marker date="1507791017087" expanded="false" signature="2549:3011" ph="..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -695,7 +669,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="161">
           <caret line="97" column="65" lean-forward="true" selection-start-line="97" selection-start-column="65" selection-end-line="97" selection-end-column="65" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -703,7 +676,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1147">
           <caret line="77" column="24" lean-forward="true" selection-start-line="77" selection-start-column="24" selection-end-line="77" selection-end-column="24" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -711,13 +683,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="203">
           <caret line="14" column="9" lean-forward="false" selection-start-line="14" selection-start-column="9" selection-end-line="14" selection-end-column="9" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/aarong/templates/app/AarongSaleReportAll.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1913">
+        <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
@@ -725,7 +696,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/aarong/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="8">
+        <state relative-caret-position="1156">
           <caret line="72" column="64" lean-forward="false" selection-start-line="72" selection-start-column="64" selection-end-line="72" selection-end-column="64" />
           <folding>
             <element signature="e#0#28#0" expanded="true" />
@@ -733,18 +704,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/brac_arong/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1216">
-          <caret line="37" column="30" lean-forward="false" selection-start-line="37" selection-start-column="30" selection-end-line="37" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/aarong/views.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
           <caret line="5" column="1" lean-forward="false" selection-start-line="5" selection-start-column="1" selection-end-line="5" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/brac_arong/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="16" column="0" lean-forward="true" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
           <folding />
         </state>
       </provider>
