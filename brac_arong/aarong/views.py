@@ -21,7 +21,8 @@ from rest_framework.authtoken.models import Token
 from rest_framework.decorators import permission_classes
 from rest_framework.permissions import IsAuthenticated
 
-from aarong.models import Product, Category, Shop, Route, Sale, SaleProductList, OtherVendor, NiceColor
+from aarong.models import Product, Category, Shop, Route, Sale, SaleProductList, OtherVendor, NiceColor, Notification, \
+    Branch
 
 
 def GetAllShopInRoute(request):
@@ -39,7 +40,10 @@ def GetAllShopInRoute(request):
     return HttpResponse(json.dumps(shops), content_type='json');
 
 def GetAllRoute(request):
-    routeList=Route.objects.all();
+    userName=request.GET['userName'];
+    user=User.objects.filter(username=userName).first();
+    branch=Branch.objects.filter(User=user).all();
+    routeList=Route.objects.filter(Branch=branch).all();
     routes=[];
     for x in routeList:
         routes.append(model_to_dict(x));
@@ -228,31 +232,113 @@ def home(request):
     return render(request, "app/index.html", {'active_page': 'dashboard.html'});
 
 
+# def GetMarketAnalysis(request):
+#     otherVendor=OtherVendor.objects.prefetch_related("other_vendor");
+#     name=[];
+#     taka=[];
+#     for x in otherVendor:
+#         list=[];
+#         name.append(x.name);
+#         money=x.other_vendor.all().aggregate(Sum('saleMoney'))['saleMoney__sum'];
+#         if money:
+#             taka.append(money);
+#         else:
+#             taka.append(0);
+#
+#     aarongSell=SaleProductList.objects.all().aggregate(Sum('saleMoney'))['saleMoney__sum'];
+#     name.append("Aarong");
+#     taka.append(aarongSell);
+#     colorData=[];
+#     color=NiceColor.objects.all();
+#     for x in color:
+#         colorData.append(x.code);
+#     data={};
+#     data['name']=name;
+#     data['money']=taka;
+#     data['color']=colorData;
+#     return HttpResponse(json.dumps(data), content_type='json');
+@csrf_exempt
 def GetMarketAnalysis(request):
-    otherVendor=OtherVendor.objects.prefetch_related("other_vendor");
-    name=[];
-    taka=[];
-    for x in otherVendor:
-        list=[];
-        name.append(x.name);
-        money=x.other_vendor.all().aggregate(Sum('saleMoney'))['saleMoney__sum'];
-        if money:
-            taka.append(money);
-        else:
-            taka.append(0);
+    categoryId=request.POST["categoryId"];
+    date=request.POST["date_range"];
+    dateData=date.split(" - ");
+    dateStart=datetime.datetime.strptime(dateData[0],"%Y-%m-%d");
+    dateEnd=datetime.datetime.strptime(dateData[1],"%Y-%m-%d");
+    daterange = pd.date_range(dateStart, dateEnd)
+    otherVendor = OtherVendor.objects.prefetch_related("other_vendor");
+    vendor={};
+    nameList=[];
+    nameList.append('Aarong');
+    dateList=[];
+    vendor['Aarong']=[];
+    listTotal=[];
 
-    aarongSell=SaleProductList.objects.all().aggregate(Sum('saleMoney'))['saleMoney__sum'];
-    name.append("Aarong");
-    taka.append(aarongSell);
-    colorData=[];
-    color=NiceColor.objects.all();
+    vendorList=OtherVendor.objects.all();
+    for x in vendorList:
+        nameList.append(x.name);
+        vendor[x.name]=[];
+
+    if int(categoryId)==-1:
+        print("category id -1 "+categoryId )
+        for single_date in daterange:
+            dateList.append(single_date.strftime("%Y-%m-%d"));
+            date=datetime.datetime.strptime(single_date.strftime("%Y-%m-%d"),"%Y-%m-%d");
+            aarongSell = SaleProductList.objects.filter(CreatedTime=date).aggregate(Sum('saleMoney'))['saleMoney__sum'];
+            aarongMoney=0;
+            if aarongSell:
+                aarongMoney = aarongSell;
+
+            vendor['Aarong'].append(aarongMoney);
+            for x in otherVendor:
+                singalData={};
+                money = x.other_vendor.filter(CreatedTime=date).aggregate(Sum('saleMoney'))['saleMoney__sum'];
+                if money:
+                    singalData['money']=money;
+                else:
+                    singalData['money'] = 0;
+
+                vendor[x.name].append(singalData['money']);
+    else:
+        print("category id  " + categoryId)
+        for single_date in daterange:
+            dateList.append(single_date.strftime("%Y-%m-%d"));
+            date=datetime.datetime.strptime(single_date.strftime("%Y-%m-%d"),"%Y-%m-%d");
+            category = Category.objects.get(pk=int(categoryId));
+            categoryAllProduct=Product.objects.filter(Category=category);
+            aarongSell = SaleProductList.objects.filter(CreatedTime=date).filter(Product=categoryAllProduct).aggregate(Sum('saleMoney'))['saleMoney__sum'];
+            aarongMoney=0;
+            if aarongSell:
+                aarongMoney = aarongSell;
+
+            vendor['Aarong'].append(aarongMoney);
+            for x in otherVendor:
+                singalData={};
+
+                money = x.other_vendor.filter(CreatedTime=date).filter(Category=category).aggregate(Sum('saleMoney'))[
+                    'saleMoney__sum'];
+                if money:
+                    singalData['money']=money;
+                else:
+                    singalData['money'] = 0;
+
+                vendor[x.name].append(singalData['money']);
+    for x in nameList:
+        sum=0;
+        for y in vendor[x]:
+            sum +=y;
+        listTotal.append(sum);
+
+    colorData = [];
+    color = NiceColor.objects.all();
     for x in color:
         colorData.append(x.code);
-    data={};
-    data['name']=name;
-    data['money']=taka;
-    data['color']=colorData;
-    return HttpResponse(json.dumps(data), content_type='json');
+
+    vendor['name']=nameList;
+    vendor['date']=dateList;
+    vendor['color']=colorData;
+    vendor['total']=listTotal;
+
+    return HttpResponse(json.dumps(vendor), content_type='json');
 
 def GetMarketProductAnalysis(request):
     category=Category.objects.prefetch_related("category_name");
@@ -319,3 +405,51 @@ def AllProductReport(request):
     data['money'] = taka;
     data['color'] = colorData;
     return HttpResponse(json.dumps(data), content_type='json');
+
+def GetNotification(request):
+    notification=Notification.objects.all().order_by("-CreatedTime").all();
+    listData=[];
+    for x in notification:
+        listData.append(model_to_dict(x));
+    return HttpResponse(json.dumps(listData), content_type='json');
+@csrf_exempt
+def GetUserSaleHistory(request):
+    user=User.objects.filter(username=request.POST['userName']).first();
+    page=request.POST['page'];
+    allSale=Sale.objects.filter(User=user);
+    history=[];
+    for x in allSale:
+        saleProduct=SaleProductList.objects.filter(Sale=x)
+
+        saleInfo={};
+        saleInfo['shopName']=x.Shop.ShopProviderName;
+        saleInfo['date']=x.OrderCreatedTime.strftime("%d-%m-%Y");
+        saleInfo['saleProduct'  ]=[];
+        sum=0;
+        for y in saleProduct:
+            product = {};
+            product['name']=y.Product.ProductName;
+            product['quantity']=y.saleQuantity;
+            product['prize']=y.saleMoney;
+            saleInfo['saleProduct'].append(product);
+            sum +=y.saleMoney;
+        saleInfo['total']=sum;
+        history.append(saleInfo);
+
+    return HttpResponse(json.dumps(history), content_type='json');
+
+def GetAllProduct(request):
+    categorys=Category.objects.all();
+    listCategory=[];
+    for x in categorys:
+        category={};
+        category['id']=x.CategoryId;
+        category['name']=x.CategoryName;
+        try:
+            category['photo'] = x.CategoryPhoto.url;
+        except:
+            category['photo']='';
+
+            listCategory.append(category);
+
+    return HttpResponse(json.dumps(listCategory), content_type='json');

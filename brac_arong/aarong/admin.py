@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 from aarong.models import Category, SaleProductList, OtherVendor, OtherVendorSaleProduct, Notification, AppUser, \
-    NiceColor
+    NiceColor, Area, Branch
 from aarong.models import Product
 # Register your models here.
 from aarong.models import Route
@@ -25,3 +25,6 @@ admin.site.register(OtherVendorSaleProduct,OtherVendorSaleProductAdmin)
 admin.site.register(Notification)
 admin.site.register(AppUser)
 admin.site.register(NiceColor)
+
+admin.site.register(Area)
+admin.site.register(Branch)

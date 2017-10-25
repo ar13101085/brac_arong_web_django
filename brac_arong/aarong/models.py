@@ -27,14 +27,23 @@ class Product(models.Model):
     ProductPhoto=models.ImageField(null=True)
     def __str__(self):
         return str(self.ProductId)+" "+self.ProductName+" "+self.Category.CategoryName;
-
+class Area(models.Model):
+    id=models.AutoField(primary_key=True);
+    areaName=models.CharField(max_length=200,default="");
+    def __str__(self):
+        return str(self.id)+" "+self.areaName;
+class Branch(models.Model):
+    id = models.AutoField(primary_key=True);
+    branchName=models.CharField(max_length=200,default="");
+    User = models.OneToOneField(User, blank=True)
+    Area = models.ForeignKey(Area, blank=True)  # route must have a branch
+    def __str__(self):
+        return str(self.id)+" "+self.branchName;
 
 class Route(models.Model):
     RouteId=models.AutoField(primary_key=True);
     RouteName=models.CharField(max_length=200,default="");
-    RouteLat=models.FloatField(default=0.0);
-    RouteLng=models.FloatField(default=0.0);
-    User=models.ForeignKey(User,blank=True) # route must have a user
+    Branch=models.ForeignKey(Branch, blank=True)  # route must have a branch
     #list of all shop
     def __str__(self):
         return str(self.RouteId)+" "+self.RouteName;
@@ -46,7 +55,7 @@ class Shop(models.Model):
     ShopProviderName=models.CharField(max_length=200,default="");
     ShopGpsAddress=models.CharField(max_length=200,default="");
     ShopDetailsAddress=models.CharField(max_length=200,default="");
-    ShopCreatedTime=models.DateTimeField(auto_now_add=True, blank=True)
+    ShopCreatedTime=models.DateTimeField(auto_now=True, blank=True)
     Route=models.ForeignKey(Route,blank=False)
     ShopPhoto=models.ImageField(null=True)
     def __str__(self):
@@ -56,7 +65,7 @@ class Shop(models.Model):
 class Sale(models.Model):
     SaleId = models.AutoField(primary_key=True);
     Shop = models.ForeignKey(Shop,blank=False,default=None);
-    OrderCreatedTime = models.DateTimeField(auto_now_add=True, blank=True);
+    OrderCreatedTime = models.DateTimeField(auto_now=True, blank=True);
     Total = models.FloatField(default=0.0);
     User = models.ForeignKey(User, blank=False,default=None)
 
@@ -69,6 +78,7 @@ class SaleProductList(models.Model):
     Sale=models.ForeignKey(Sale,default=None);
     saleQuantity = models.IntegerField(default=0);
     saleMoney=models.FloatField(default=0.0);
+    CreatedTime = models.DateField(default=now);
     def __str__(self):
         return self.Product.ProductName+" "+str(self.saleMoney);
 
@@ -91,7 +101,7 @@ class Notification(models.Model):
     id = models.AutoField(primary_key=True);
     title=models.TextField(default="");
     text=models.TextField(default="");
-    CreatedTime = models.DateTimeField(auto_now_add=True, blank=True);
+    CreatedTime = models.DateTimeField(auto_now=True, blank=True);
     def __str__(self):
         return str(self.id)+" "+self.title;
 class NiceColor(models.Model):

@@ -1,0 +1,265 @@
+{% extends "app/base_site.html" %}
+
+{% block title %} Home {% endblock title %}
+
+{% block stylesheets %}
+    {{ block.super }}
+{% endblock stylesheets %}
+
+{% block content %}
+    <div class="right_col" role="main">
+        <div class="row x_title">
+            <div class="col-xs-12" align="center">
+                <h3>Sales report analysis
+                </h3>
+            </div>
+        </div>
+        <div class="row x_title">
+            <div class="col-xs-6">
+                <div id="area_name" class="col-xs-4">
+                    <select id="area_list" class="form-control">
+                        <option value="-1">Select Area</option>
+                    </select>
+                </div>
+                <div id="branch_name" class="col-xs-4">
+                    <select id="area_list" class="form-control">
+                        <option value="-1">Select Branch</option>
+                    </select>
+                </div>
+                <div id="route_name" class="col-xs-4">
+                    <select id="area_list" class="form-control">
+                        <option value="-1">Select Route</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-xs-6">
+                <div id="product_name" class="col-xs-3">
+                    <select id="product_list" class="form-control">
+                        <option value="-1">Select category</option>
+                    </select>
+                </div>
+                <div id="product_name" class="col-xs-3">
+                    <select id="product_list" class="form-control">
+                        <option value="-1">Select category</option>
+                    </select>
+                </div>
+
+                <div id="app_daterange" class="col-xs-4"
+                     style="background: #fff;cursor: pointer;border: 1px solid #ccc;padding-left: 10px;padding-right:10px;padding-top: 6px;padding-bottom: 7px;">
+                    <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
+                    <span>December 30, 2014 - January 28, 2015</span> <b class="caret"></b>
+                </div>
+
+                <div class="col-xs-2">
+                    <button id="submit_filter" class="btn btn-dark">
+                        <i class="glyphicon glyphicon-filter fa fa-filter"></i>
+                        <span>Submit</span>
+                    </button>
+                </div>
+
+
+            </div>
+        </div>
+        <!-- top tiles -->
+        <div class="row tile_count">
+
+            <div id="fig_container">
+                <div class="col-lg-6">
+                    <canvas id="pie-chart" width="800px" height="450px"></canvas>
+                </div>
+                <div class="col-lg-6">
+                    <canvas id="line-chart" width="800px" height="450px"></canvas>
+                </div>
+                <div class="col-lg-6" style="margin-top: 100px">
+                    <canvas id="bar-chart" width="800px" height="450px"></canvas>
+                </div>
+                <div class="col-lg-6" style="margin-top: 100px">
+                    <canvas id="line-chart-date" width="800px" height="450px"></canvas>
+                </div>
+            </div>
+
+        </div>
+        <!-- /top tiles -->
+
+        <div class="row">
+
+        </div>
+
+        <br/>
+
+
+    </div>
+{% endblock content %}
+
+{% block javascripts %}
+    {{ block.super }}
+
+    <!-- gauge.js -->
+    <script src="/static/vendors/gauge.js/dist/gauge.min.js"></script>
+    <!-- Skycons -->
+    <script src="/static/vendors/skycons/skycons.js"></script>
+    <!-- Flot -->
+    <script src="/static/vendors/Flot/jquery.flot.js"></script>
+    <script src="/static/vendors/Flot/jquery.flot.pie.js"></script>
+    <script src="/static/vendors/Flot/jquery.flot.time.js"></script>
+    <script src="/static/vendors/Flot/jquery.flot.stack.js"></script>
+    <script src="/static/vendors/Flot/jquery.flot.resize.js"></script>
+    <!-- Flot plugins -->
+    <script src="/static/vendors/flot.orderbars/js/jquery.flot.orderBars.js"></script>
+    <script src="/static/vendors/flot-spline/js/jquery.flot.spline.min.js"></script>yea
+    <script src="/static/vendors/flot.curvedlines/curvedLines.js"></script>
+    <!-- DateJS -->
+    <script src="/static/vendors/DateJS/build/date.js"></script>
+    <!-- JQVMap -->
+    <script src="/static/vendors/jqvmap/dist/jquery.vmap.js"></script>
+    <script src="/static/vendors/jqvmap/dist/maps/jquery.vmap.world.js"></script>
+    <script src="/static/vendors/jqvmap/examples/js/jquery.vmap.sampledata.js"></script>
+    <!-- Chart.js -->
+    <script src="/static/App/chartjs/chart.js/dist/Chart.bundle.min.js"></script>
+    <script src="/static/App/Chart.PieceLabel.min.js"></script>
+    <script>
+        $(".btn-group > .btn").click(function () {
+            $(".btn-group > .btn").removeClass("active");
+            $(this).addClass("active");
+        });
+
+        $('#submit_filter').click(function () {
+            loadPieGraph();
+        });
+
+        {% comment %} var options = {
+             scales: {
+                 xAxes: [{
+                     gridLines: {
+                         offsetGridLines: true
+                     }
+                 }]
+             }
+         }{% endcomment %}
+        $('#app_daterange span').html(moment().subtract(29, 'days').format('YYYY-MM-DD') + ' - ' + moment().format('YYYY-MM-DD'));
+
+
+        var loadPieGraph = function () {
+            $.post('/GetMarketAnalysis/', {
+                'date_range': $('#app_daterange span').html(),
+                'categoryId': $('#product_list').val()
+            }, function (data, status) {
+
+                $('#fig_container').html();
+                $('#fig_container').html('<div class="col-lg-6"><canvas id="pie-chart" width="800px" height="450px"></canvas></div><div class="col-lg-6"><canvas id="line-chart" width="800px" height="450px"></canvas></div><div class="col-lg-6" style="margin-top: 100px"><canvas id="bar-chart" width="800px" height="450px"></canvas></div><div class="col-lg-6" style="margin-top: 100px"><canvas id="line-chart-date" width="800px" height="450px"></canvas></div>');
+
+                var lineChartData = [];
+                console.log(JSON.stringify(data));
+                for (var i = 0; i < data.name.length; i++) {
+                    lineChartData.push({
+                        data: data[data.name[i]],
+                        label: data.name[i],
+                        borderColor: data.color[i],
+                        fill: false
+                    });
+                }
+                //console.log(JSON.stringify(lineChartData));
+
+                new Chart(document.getElementById("bar-chart"), {
+                    type: 'bar',
+                    data: {
+                        labels: data['name'],
+                        datasets: [
+                            {
+                                label: "Bar Chart (Company VS Taka)",
+                                backgroundColor: data['color'],
+                                data: data['total']
+                            }
+                        ]
+                    },
+                    options: {
+                        legend: {display: false},
+                        title: {
+                            display: true,
+                            text: 'Bar Chart (Company VS Taka)'
+                        }
+                    }
+                });
+
+                new Chart(document.getElementById("pie-chart"), {
+                    type: 'doughnut',
+                    data: {
+                        labels: data['name'],
+                        datasets: [{
+                            label: data['name'],
+                            backgroundColor: data['color'],
+                            //backgroundColor: '#3e95cd',
+                            data: data['total']
+                        }]
+                    },
+                    options: {
+                        title: {
+                            display: true,
+                            text: 'Vendor comparison',
+                            position: "top",
+                        },
+                        pieceLabel: {
+                            render: 'label',
+                            arc: true,
+                            overlap: false,
+                            fontColor: '#FFFFFF',
+                        }
+                    }
+                });
+
+                new Chart(document.getElementById("line-chart"), {
+                    type: 'line',
+                    data: {
+                        labels: data['name'],
+                        datasets: [
+                            {
+                                label: "Market Analysis",
+                                //backgroundColor: data['color'],
+                                backgroundColor: '#3e95cd',
+                                data: data['total']
+                            }
+                        ]
+                    },
+                    options: {
+                        title: {
+                            display: true,
+                            text: 'Market Analysis'
+                        }
+                    }
+                });
+
+
+                new Chart(document.getElementById("line-chart-date"), {
+                    type: 'line',
+                    data: {
+                        labels: data.date,
+                        datasets: lineChartData
+                    },
+                    options: {
+                        title: {
+                            display: true,
+                            text: 'Total price vs vendor vs date'
+                        }
+                    }
+                });
+
+
+            });
+        }
+        loadPieGraph();
+
+        var allProduct = function () {
+            $.get('/GetAllProduct/', function (data, status) {
+                //console.log(JSON.stringify(data));
+                $('#product_list').html('<option value="-1">Select Category</option>');
+                for (var i = 0; i < data.length; i++) {
+                    //console.log(i);
+                    $('#product_list').append('<option value="' + data[i].id + '">' + data[i].name + '</option>');
+                }
+
+            });
+        }
+        allProduct();
+
+    </script>
+{% endblock javascripts %}

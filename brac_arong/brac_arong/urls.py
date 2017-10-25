@@ -35,6 +35,9 @@ urlpatterns = [
     url(r'^GetMarketAnalysis/$', aarong.views.GetMarketAnalysis, name='GetMarketAnalysis'),
     url(r'^GetMarketProductAnalysis/$', aarong.views.GetMarketProductAnalysis, name='GetMarketProductAnalysis'),
     url(r'^AllProductReport/$', aarong.views.AllProductReport, name='AllProductReport'),
+    url(r'^GetNotification/$', aarong.views.GetNotification, name='GetNotification'),
+    url(r'^GetUserSaleHistory/$', aarong.views.GetUserSaleHistory, name='GetUserSaleHistory'),
+    url(r'^GetAllProduct/$', aarong.views.GetAllProduct, name='GetAllProduct'),
     url(r'^.*\.html', views.gentella_html, name='gentella'),
     url(r'^$', views.index, name='index'),
 ]
