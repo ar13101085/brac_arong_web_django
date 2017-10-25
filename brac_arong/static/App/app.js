@@ -20,3 +20,4 @@ $('#app_daterange').daterangepicker(
         $('#app_daterange span').html(start.format('YYYY-MM-DD') + ' - ' + end.format('YYYY-MM-DD'));
     }
 );
+
