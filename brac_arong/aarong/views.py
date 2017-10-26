@@ -23,7 +23,7 @@ from rest_framework.decorators import permission_classes
 from rest_framework.permissions import IsAuthenticated
 
 from aarong.models import Product, Category, Shop, Route, Sale, SaleProductList, OtherVendor, NiceColor, Notification, \
-    Branch, Area
+    Branch, Area, AppUser
 
 
 def GetAllShopInRoute(request):
@@ -153,8 +153,11 @@ def GetToken(request):
             pass;
         else:
             token = Token.objects.create(user=user)
+
+        appUser=AppUser.objects.filter(user=user).first();
         data = model_to_dict(token);
         data['res'] = True;
+        data['pic']=appUser.picture.url;
         return HttpResponse(json.dumps(data), content_type='json');
     else:
         data = {};

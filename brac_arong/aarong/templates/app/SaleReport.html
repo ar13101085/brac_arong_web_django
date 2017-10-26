@@ -64,17 +64,17 @@
         <div class="row tile_count">
 
             <div id="fig_container">
-                <div class="col-lg-6">
+                <div class="col-xs-6">
                     <canvas id="bar-chart-date-vs-taka" width="800px" height="450px"></canvas>
                 </div>
-                <div class="line-chart-date-vs-quantity-vs-product">
-                    <canvas id="line-chart" width="800px" height="450px"></canvas>
+                <div class="col-xs-6">
+                    <canvas id="line-chart-date-vs-quantity-vs-product" width="800px" height="450px"></canvas>
                 </div>
-                <div class="col-lg-6" style="margin-top: 100px">
+                <div class="col-xs-6" style="margin-top: 100px">
                     <canvas id="bar-chart-taka-vs-product" width="800px" height="450px"></canvas>
                 </div>
-                <div class="col-lg-6" style="margin-top: 100px">
-                    <canvas id="line-chart-date" width="800px" height="450px"></canvas>
+                <div class="col-xs-6" style="margin-top: 100px">
+                    <canvas id="line-chart-date-vs-taka-vs-product" width="800px" height="450px"></canvas>
                 </div>
             </div>
 
@@ -208,13 +208,13 @@
             };
             console.log(data);
             $.post('/SaleReport/', data, function (data, status) {
-                 console.log(JSON.stringify(data));
+                console.log(JSON.stringify(data));
 
                 var lineChartData = [];
-                var colorCount=1;
+                var colorCount = 1;
                 for (var i = 0; i < data.AarongAllProduct.length; i++) {
-                    if(data.color.length<=colorCount){
-                        colorCount=1;
+                    if (data.color.length <= colorCount) {
+                        colorCount = 1;
                     }
                     lineChartData.push({
                         data: data.listAarongProductQuantityByDate[data.AarongAllProduct[i]],
@@ -223,9 +223,40 @@
                         fill: false
                     });
                 }
-                console.log(JSON.stringify(lineChartData));
 
-                {% comment %}new Chart(document.getElementById("line-chart-date-vs-quantity-vs-product"), {
+
+                var lineChartTakaData = [];
+                var colorCount = 1;
+                for (var i = 0; i < data.AarongAllProduct.length; i++) {
+                    if (data.color.length <= colorCount) {
+                        colorCount = 1;
+                    }
+                    lineChartTakaData.push({
+                        data: data.listAarongProductSaleByDate[data.AarongAllProduct[i]],
+                        label: data.AarongAllProduct[i],
+                        borderColor: data.color[colorCount],
+                        fill: false
+                    });
+                }
+
+
+                new Chart(document.getElementById("line-chart-date-vs-taka-vs-product"), {
+                    type: 'line',
+                    data: {
+                        labels: data.dateList,
+                        datasets: lineChartTakaData
+                    },
+                    options: {
+                        title: {
+                            display: true,
+                            text: 'Total price vs vendor vs date'
+                        },
+                        legend: {
+                            display: false
+                        }
+                    }
+                });
+                new Chart(document.getElementById("line-chart-date-vs-quantity-vs-product"), {
                     type: 'line',
                     data: {
                         labels: data.dateList,
@@ -234,10 +265,13 @@
                     options: {
                         title: {
                             display: true,
-                            text: 'Total price vs vendor vs date'
+                            text: 'Total Quantity vs vendor vs date'
+                        },
+                        legend: {
+                            display: false
                         }
                     }
-                });{% endcomment %}
+                });
                 new Chart(document.getElementById("bar-chart-date-vs-taka"), {
                     type: 'bar',
                     data: {
