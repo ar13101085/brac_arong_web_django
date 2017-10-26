@@ -22,25 +22,25 @@
                     </select>
                 </div>
                 <div id="branch_name" class="col-xs-4">
-                    <select id="area_list" class="form-control">
+                    <select id="branch_list" class="form-control">
                         <option value="-1">Select Branch</option>
                     </select>
                 </div>
                 <div id="route_name" class="col-xs-4">
-                    <select id="area_list" class="form-control">
+                    <select id="route_list" class="form-control">
                         <option value="-1">Select Route</option>
                     </select>
                 </div>
             </div>
             <div class="col-xs-6">
-                <div id="product_name" class="col-xs-3">
-                    <select id="product_list" class="form-control">
+                <div id="category_name" class="col-xs-3">
+                    <select id="category_list" class="form-control">
                         <option value="-1">Select category</option>
                     </select>
                 </div>
                 <div id="product_name" class="col-xs-3">
                     <select id="product_list" class="form-control">
-                        <option value="-1">Select category</option>
+                        <option value="-1">Select product</option>
                     </select>
                 </div>
 
@@ -64,17 +64,17 @@
         <div class="row tile_count">
 
             <div id="fig_container">
-                <div class="col-lg-6">
-                    <canvas id="pie-chart" width="800px" height="450px"></canvas>
+                <div class="col-xs-6">
+                    <canvas id="bar-chart-date-vs-taka" width="800px" height="450px"></canvas>
                 </div>
-                <div class="col-lg-6">
-                    <canvas id="line-chart" width="800px" height="450px"></canvas>
+                <div class="col-xs-6">
+                    <canvas id="line-chart-date-vs-quantity-vs-product" width="800px" height="450px"></canvas>
                 </div>
-                <div class="col-lg-6" style="margin-top: 100px">
-                    <canvas id="bar-chart" width="800px" height="450px"></canvas>
+                <div class="col-xs-6" style="margin-top: 100px">
+                    <canvas id="bar-chart-taka-vs-product" width="800px" height="450px"></canvas>
                 </div>
-                <div class="col-lg-6" style="margin-top: 100px">
-                    <canvas id="line-chart-date" width="800px" height="450px"></canvas>
+                <div class="col-xs-6" style="margin-top: 100px">
+                    <canvas id="line-chart-date-vs-taka-vs-product" width="800px" height="450px"></canvas>
                 </div>
             </div>
 
@@ -118,6 +118,64 @@
     <script src="/static/App/chartjs/chart.js/dist/Chart.bundle.min.js"></script>
     <script src="/static/App/Chart.PieceLabel.min.js"></script>
     <script>
+
+
+        $('#area_list').change(function () {
+            var areaId = $(this).val();
+            $('#branch_list').html('<option value="-1">Select Branch</option>');
+            $('#route_list').html('<option value="-1">Select Route</option>');
+            $.get('/GetAllBranch?areaId=' + areaId, function (data, status) {
+                for (var i = 0; i < data.length; i++) {
+
+                    $('#branch_list').append('<option value="' + data[i].id + '">' + data[i].branchName + '</option>');
+                }
+
+            });
+        });
+        $('#branch_list').change(function () {
+            var branchId = $(this).val();
+            $('#route_list').html('<option value="-1">Select Route</option>');
+            $.get('/GetAllRoute?branchId=' + branchId, function (data, status) {
+                for (var i = 0; i < data.length; i++) {
+
+                    $('#route_list').append('<option value="' + data[i].RouteId + '">' + data[i].RouteName + '</option>');
+                }
+
+            });
+        });
+
+
+        $('#category_list').change(function () {
+            var categoryId = $(this).val();
+            $('#product_list').html('<option value="-1">Select Product</option>');
+            $.get('/GetAllProductInCategory?categoryId=' + categoryId, function (data, status) {
+                for (var i = 0; i < data.length; i++) {
+                    $('#product_list').append('<option value="' + data[i].id + '">' + data[i].name + '</option>');
+                }
+
+            });
+        });
+
+
+        $.get('/GetAllArea/', function (data, status) {
+            //console.log(JSON.stringify(data));
+            $('#area_list').html('<option value="-1">Select Area</option>');
+            for (var i = 0; i < data.length; i++) {
+                $('#area_list').append('<option value="' + data[i].id + '">' + data[i].areaName + '</option>');
+            }
+
+        });
+        $.get('/GetAllCategory/', function (data, status) {
+            //console.log(JSON.stringify(data));
+            $('#category_list').html('<option value="-1">Select Category</option>');
+            for (var i = 0; i < data.length; i++) {
+                //console.log(i);
+                $('#category_list').append('<option value="' + data[i].id + '">' + data[i].name + '</option>');
+            }
+
+        });
+
+
         $(".btn-group > .btn").click(function () {
             $(".btn-group > .btn").removeClass("active");
             $(this).addClass("active");
@@ -140,12 +198,122 @@
 
 
         var loadPieGraph = function () {
-            $.post('/GetMarketAnalysis/', {
-                'date_range': $('#app_daterange span').html(),
-                'categoryId': $('#product_list').val()
-            }, function (data, status) {
+            var data = {
+                'areaId': $('#area_list').val(),
+                'branchId': $('#branch_list').val(),
+                'routeId': $('#route_list').val(),
+                'categoryId': $('#category_list').val(),
+                'productId': $('#product_list').val(),
+                'date_range': $('#app_daterange span').html()
+            };
+            console.log(data);
+            $.post('/SaleReport/', data, function (data, status) {
+                console.log(JSON.stringify(data));
 
-                $('#fig_container').html();
+                var lineChartData = [];
+                var colorCount = 1;
+                for (var i = 0; i < data.AarongAllProduct.length; i++) {
+                    if (data.color.length <= colorCount) {
+                        colorCount = 1;
+                    }
+                    lineChartData.push({
+                        data: data.listAarongProductQuantityByDate[data.AarongAllProduct[i]],
+                        label: data.AarongAllProduct[i],
+                        borderColor: data.color[colorCount],
+                        fill: false
+                    });
+                }
+
+
+                var lineChartTakaData = [];
+                var colorCount = 1;
+                for (var i = 0; i < data.AarongAllProduct.length; i++) {
+                    if (data.color.length <= colorCount) {
+                        colorCount = 1;
+                    }
+                    lineChartTakaData.push({
+                        data: data.listAarongProductSaleByDate[data.AarongAllProduct[i]],
+                        label: data.AarongAllProduct[i],
+                        borderColor: data.color[colorCount],
+                        fill: false
+                    });
+                }
+
+
+                new Chart(document.getElementById("line-chart-date-vs-taka-vs-product"), {
+                    type: 'line',
+                    data: {
+                        labels: data.dateList,
+                        datasets: lineChartTakaData
+                    },
+                    options: {
+                        title: {
+                            display: true,
+                            text: 'Total price vs vendor vs date'
+                        },
+                        legend: {
+                            display: false
+                        }
+                    }
+                });
+                new Chart(document.getElementById("line-chart-date-vs-quantity-vs-product"), {
+                    type: 'line',
+                    data: {
+                        labels: data.dateList,
+                        datasets: lineChartData
+                    },
+                    options: {
+                        title: {
+                            display: true,
+                            text: 'Total Quantity vs vendor vs date'
+                        },
+                        legend: {
+                            display: false
+                        }
+                    }
+                });
+                new Chart(document.getElementById("bar-chart-date-vs-taka"), {
+                    type: 'bar',
+                    data: {
+                        labels: data['dateList'],
+                        datasets: [
+                            {
+                                label: "Bar Chart (Date VS Taka)",
+                                backgroundColor: data['color'],
+                                data: data['totalSale']
+                            }
+                        ]
+                    },
+                    options: {
+                        legend: {display: false},
+                        title: {
+                            display: true,
+                            text: 'Bar Chart (Date VS Taka)'
+                        }
+                    }
+                });
+
+                new Chart(document.getElementById("bar-chart-taka-vs-product"), {
+                    type: 'bar',
+                    data: {
+                        labels: data['AarongAllProduct'],
+                        datasets: [
+                            {
+                                label: "Bar Chart (Product VS Taka)",
+                                backgroundColor: data['color'],
+                                data: data['totalSale']
+                            }
+                        ]
+                    },
+                    options: {
+                        legend: {display: false},
+                        title: {
+                            display: true,
+                            text: 'Bar Chart (Product VS Taka)'
+                        }
+                    }
+                });
+                {% comment %}$('#fig_container').html();
                 $('#fig_container').html('<div class="col-lg-6"><canvas id="pie-chart" width="800px" height="450px"></canvas></div><div class="col-lg-6"><canvas id="line-chart" width="800px" height="450px"></canvas></div><div class="col-lg-6" style="margin-top: 100px"><canvas id="bar-chart" width="800px" height="450px"></canvas></div><div class="col-lg-6" style="margin-top: 100px"><canvas id="line-chart-date" width="800px" height="450px"></canvas></div>');
 
                 var lineChartData = [];
@@ -241,14 +409,14 @@
                             text: 'Total price vs vendor vs date'
                         }
                     }
-                });
+                });{% endcomment %}
 
 
             });
         }
         loadPieGraph();
 
-        var allProduct = function () {
+        {% comment %}var allProduct = function () {
             $.get('/GetAllProduct/', function (data, status) {
                 //console.log(JSON.stringify(data));
                 $('#product_list').html('<option value="-1">Select Category</option>');
@@ -259,7 +427,8 @@
 
             });
         }
-        allProduct();
+        allProduct();{% endcomment %}
+
 
     </script>
 {% endblock javascripts %}
