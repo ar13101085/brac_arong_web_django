@@ -80,7 +80,7 @@ class SaleProductList(models.Model):
     saleMoney=models.FloatField(default=0.0);
     CreatedTime = models.DateField(default=now);
     def __str__(self):
-        return self.Product.ProductName+" "+str(self.saleMoney);
+        return self.Product.Category.CategoryName+" "+self.Product.ProductName+" "+str(self.saleMoney);
 
 class OtherVendor(models.Model):
     id = models.AutoField(primary_key=True);

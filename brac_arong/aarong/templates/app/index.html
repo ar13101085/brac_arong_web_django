@@ -17,7 +17,8 @@
         <div class="row x_title">
             <div class="col-xs-12">
 
-                <button id="submit_filter" class="pull-right btn btn-dark" style="padding-left: 10px;padding-right:10px;padding-top: 6px;padding-bottom: 5px;margin-left: 5px">
+                <button id="submit_filter" class="pull-right btn btn-dark"
+                        style="padding-left: 10px;padding-right:10px;padding-top: 6px;padding-bottom: 5px;margin-left: 5px">
                     <i class="glyphicon glyphicon-filter fa fa-filter"></i>
                     <span>Submit</span>
                 </button>
@@ -31,7 +32,7 @@
                     <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
                     <span>December 30, 2014 - January 28, 2015</span> <b class="caret"></b>
                 </div>
-               {% comment %} <div
+                {% comment %} <div
                      style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc">
                     <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
                     <span>December 30, 2014 - January 28, 2015</span> <b class="caret"></b>
@@ -128,7 +129,7 @@
         var loadPieGraph = function () {
             $.post('/GetMarketAnalysis/', {
                 'date_range': $('#app_daterange span').html(),
-                'categoryId':$('#product_list').val()
+                'categoryId': $('#product_list').val()
             }, function (data, status) {
 
                 $('#fig_container').html();
@@ -144,7 +145,7 @@
                         fill: false
                     });
                 }
-                //console.log(JSON.stringify(lineChartData));
+                console.log(JSON.stringify(lineChartData));
 
                 new Chart(document.getElementById("bar-chart"), {
                     type: 'bar',
@@ -213,7 +214,19 @@
                         }
                     }
                 });
-
+                {% comment %}new Chart(document.getElementById("line-chart"), {
+                    type: 'line',
+                    data: {
+                        labels: data.date,
+                        datasets: lineChartData
+                    },
+                    options: {
+                        title: {
+                            display: true,
+                            text: 'Total price vs vendor vs date'
+                        }
+                    }
+                });{% endcomment %}
 
                 new Chart(document.getElementById("line-chart-date"), {
                     type: 'line',
@@ -234,13 +247,13 @@
         }
         loadPieGraph();
 
-        var allProduct=function () {
-            $.get('/GetAllProduct/', function (data, status) {
+        var allProduct = function () {
+            $.get('/GetAllCategory/', function (data, status) {
                 //console.log(JSON.stringify(data));
                 $('#product_list').html('<option value="-1">Select Product</option>');
-                for(var i=0;i<data.length;i++){
+                for (var i = 0; i < data.length; i++) {
                     //console.log(i);
-                    $('#product_list').append('<option value="'+data[i].id+'">'+data[i].name+'</option>');
+                    $('#product_list').append('<option value="' + data[i].id + '">' + data[i].name + '</option>');
                 }
 
             });
