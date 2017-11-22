@@ -44,6 +44,7 @@ urlpatterns = [
     url(r'^GetAllRoute/$', aarong.views.GetAllRoute, name='GetAllRoute'),
     url(r'^GetAllRouteByUser/$', aarong.views.GetAllRouteByUser, name='GetAllRouteByUser'),
     url(r'^SaleReport/$', aarong.views.SaleReport, name='SaleReport'),
+    url(r'^UserRouteList/$', aarong.views.UserRouteList, name='UserRouteList'),
     url(r'^.*\.html', views.gentella_html, name='gentella'),
     url(r'^$', views.index, name='index'),
 ]

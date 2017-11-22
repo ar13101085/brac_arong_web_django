@@ -156,6 +156,7 @@ def GetToken(request):
 
         appUser=AppUser.objects.filter(user=user).first();
         data = model_to_dict(token);
+        data['name']=appUser.user.get_full_name();
         data['res'] = True;
         data['pic']=appUser.picture.url;
         return HttpResponse(json.dumps(data), content_type='json');
@@ -686,3 +687,19 @@ def GetMarketAnalysis(request):
     vendor['total'] = listTotal;
 
     return HttpResponse(json.dumps(vendor), content_type='json');
+
+def UserRouteList(request):
+    userBranch=Branch.objects.filter(User=User.objects.get(username=request.GET['id'])).first();
+    data= [];
+    if userBranch is None:
+        return HttpResponse(json.dumps(data), content_type='json');
+
+    routeList=Route.objects.filter(Branch=userBranch).all();
+
+    for x in routeList:
+        data.append({
+           "name":x.RouteName,
+            "id":x.RouteId
+        });
+
+    return HttpResponse(json.dumps(data), content_type='json');
