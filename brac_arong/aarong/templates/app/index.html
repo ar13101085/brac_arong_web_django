@@ -135,15 +135,30 @@
                 $('#fig_container').html();
                 $('#fig_container').html('<div class="col-lg-6"><canvas id="pie-chart" width="800px" height="450px"></canvas></div><div class="col-lg-6"><canvas id="line-chart" width="800px" height="450px"></canvas></div><div class="col-lg-6" style="margin-top: 100px"><canvas id="bar-chart" width="800px" height="450px"></canvas></div><div class="col-lg-6" style="margin-top: 100px"><canvas id="line-chart-date" width="800px" height="450px"></canvas></div>');
 
+                var removeIndex=[];
                 var lineChartData = [];
-                console.log(JSON.stringify(data));
                 for (var i = 0; i < data.name.length; i++) {
+
+                    {% comment %}var sum=0;
+                    for(var j=0;j<data[data.name[i]].length;j++){
+                        sum+=data[data.name[i]][j];
+                    }
+                    if(sum==0){
+                        //console.log(data.name[i]+"  is 0");
+                        data.name.splice(i,1);
+                        data.total.splice(i,1);
+                        delete data[data.name[i]];
+                        continue;
+                    }{% endcomment %}
+
+
                     lineChartData.push({
                         data: data[data.name[i]],
                         label: data.name[i],
                         borderColor: data.color[i],
                         fill: false
                     });
+
                 }
                 console.log(JSON.stringify(lineChartData));
 
@@ -245,20 +260,24 @@
 
             });
         }
-        loadPieGraph();
+
 
         var allProduct = function () {
             $.get('/GetAllCategory/', function (data, status) {
                 //console.log(JSON.stringify(data));
-                $('#product_list').html('<option value="-1">Select Product</option>');
+                //$('#product_list').html('<option value="-1">Select Product</option>');
+                $('#product_list').html('');
                 for (var i = 0; i < data.length; i++) {
                     //console.log(i);
                     $('#product_list').append('<option value="' + data[i].id + '">' + data[i].name + '</option>');
                 }
+                 loadPieGraph();
 
             });
+
         }
         allProduct();
+
 
     </script>
 {% endblock javascripts %}

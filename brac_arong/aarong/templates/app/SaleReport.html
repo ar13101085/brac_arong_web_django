@@ -208,8 +208,8 @@
             };
             console.log(data);
             $.post('/SaleReport/', data, function (data, status) {
-                console.log(JSON.stringify(data));
-
+                //console.log(JSON.stringify(data));
+                $('#fig_container').html('<div class="col-xs-6"><canvas id="bar-chart-date-vs-taka" width="800px" height="450px"></canvas></div><div class="col-xs-6"><canvas id="line-chart-date-vs-quantity-vs-product" width="800px" height="450px"></canvas></div><div class="col-xs-6" style="margin-top: 100px"><canvas id="bar-chart-taka-vs-product" width="800px" height="450px"></canvas></div><div class="col-xs-6" style="margin-top: 100px"><canvas id="line-chart-date-vs-taka-vs-product" width="800px" height="450px"></canvas></div>');
                 var lineChartData = [];
                 var colorCount = 1;
                 for (var i = 0; i < data.AarongAllProduct.length; i++) {
@@ -313,121 +313,9 @@
                         }
                     }
                 });
-                {% comment %}$('#fig_container').html();
-                $('#fig_container').html('<div class="col-lg-6"><canvas id="pie-chart" width="800px" height="450px"></canvas></div><div class="col-lg-6"><canvas id="line-chart" width="800px" height="450px"></canvas></div><div class="col-lg-6" style="margin-top: 100px"><canvas id="bar-chart" width="800px" height="450px"></canvas></div><div class="col-lg-6" style="margin-top: 100px"><canvas id="line-chart-date" width="800px" height="450px"></canvas></div>');
-
-                var lineChartData = [];
-                console.log(JSON.stringify(data));
-                for (var i = 0; i < data.name.length; i++) {
-                    lineChartData.push({
-                        data: data[data.name[i]],
-                        label: data.name[i],
-                        borderColor: data.color[i],
-                        fill: false
-                    });
-                }
-                //console.log(JSON.stringify(lineChartData));
-
-                new Chart(document.getElementById("bar-chart"), {
-                    type: 'bar',
-                    data: {
-                        labels: data['name'],
-                        datasets: [
-                            {
-                                label: "Bar Chart (Company VS Taka)",
-                                backgroundColor: data['color'],
-                                data: data['total']
-                            }
-                        ]
-                    },
-                    options: {
-                        legend: {display: false},
-                        title: {
-                            display: true,
-                            text: 'Bar Chart (Company VS Taka)'
-                        }
-                    }
-                });
-
-                new Chart(document.getElementById("pie-chart"), {
-                    type: 'doughnut',
-                    data: {
-                        labels: data['name'],
-                        datasets: [{
-                            label: data['name'],
-                            backgroundColor: data['color'],
-                            //backgroundColor: '#3e95cd',
-                            data: data['total']
-                        }]
-                    },
-                    options: {
-                        title: {
-                            display: true,
-                            text: 'Vendor comparison',
-                            position: "top",
-                        },
-                        pieceLabel: {
-                            render: 'label',
-                            arc: true,
-                            overlap: false,
-                            fontColor: '#FFFFFF',
-                        }
-                    }
-                });
-
-                new Chart(document.getElementById("line-chart"), {
-                    type: 'line',
-                    data: {
-                        labels: data['name'],
-                        datasets: [
-                            {
-                                label: "Market Analysis",
-                                //backgroundColor: data['color'],
-                                backgroundColor: '#3e95cd',
-                                data: data['total']
-                            }
-                        ]
-                    },
-                    options: {
-                        title: {
-                            display: true,
-                            text: 'Market Analysis'
-                        }
-                    }
-                });
-
-
-                new Chart(document.getElementById("line-chart-date"), {
-                    type: 'line',
-                    data: {
-                        labels: data.date,
-                        datasets: lineChartData
-                    },
-                    options: {
-                        title: {
-                            display: true,
-                            text: 'Total price vs vendor vs date'
-                        }
-                    }
-                });{% endcomment %}
-
-
             });
         }
         loadPieGraph();
-
-        {% comment %}var allProduct = function () {
-            $.get('/GetAllProduct/', function (data, status) {
-                //console.log(JSON.stringify(data));
-                $('#product_list').html('<option value="-1">Select Category</option>');
-                for (var i = 0; i < data.length; i++) {
-                    //console.log(i);
-                    $('#product_list').append('<option value="' + data[i].id + '">' + data[i].name + '</option>');
-                }
-
-            });
-        }
-        allProduct();{% endcomment %}
 
 
     </script>

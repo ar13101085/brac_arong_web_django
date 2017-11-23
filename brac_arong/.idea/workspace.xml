@@ -5,10 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5b6e1b93-2bf8-45ba-b474-2864a8823e92" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db.sqlite3" afterPath="$PROJECT_DIR$/db.sqlite3" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/aarong/templates/app/SaleReport.html" afterPath="$PROJECT_DIR$/aarong/templates/app/SaleReport.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/aarong/templates/app/index.html" afterPath="$PROJECT_DIR$/aarong/templates/app/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/aarong/views.py" afterPath="$PROJECT_DIR$/aarong/views.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/brac_arong/urls.py" afterPath="$PROJECT_DIR$/brac_arong/urls.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -46,11 +46,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/aarong/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="212">
-              <caret line="28" column="21" lean-forward="false" selection-start-line="28" selection-start-column="4" selection-end-line="28" selection-end-column="21" />
+            <state relative-caret-position="488">
+              <caret line="702" column="0" lean-forward="true" selection-start-line="702" selection-start-column="0" selection-end-line="702" selection-end-column="0" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
               </folding>
@@ -58,10 +58,30 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="SaleReport.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/aarong/templates/app/SaleReport.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="105">
+              <caret line="194" column="14" lean-forward="true" selection-start-line="194" selection-start-column="14" selection-end-line="194" selection-end-column="14" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/aarong/templates/app/index.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="329">
+              <caret line="134" column="43" lean-forward="true" selection-start-line="134" selection-start-column="16" selection-end-line="134" selection-end-column="43" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
         <entry file="file://$USER_HOME$/Envs/aos/Lib/site-packages/django/contrib/auth/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="118">
+            <state relative-caret-position="6256">
               <caret line="383" column="12" lean-forward="false" selection-start-line="383" selection-start-column="4" selection-end-line="383" selection-end-column="12" />
               <folding />
             </state>
@@ -71,7 +91,7 @@
       <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/aarong/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="42">
+            <state relative-caret-position="663">
               <caret line="43" column="11" lean-forward="false" selection-start-line="43" selection-start-column="4" selection-end-line="43" selection-end-column="11" />
               <folding>
                 <element signature="e#0#28#0" expanded="true" />
@@ -83,7 +103,7 @@
       <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/brac_arong/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="416">
+            <state relative-caret-position="680">
               <caret line="46" column="55" lean-forward="false" selection-start-line="46" selection-start-column="55" selection-end-line="46" selection-end-column="55" />
               <folding />
             </state>
@@ -152,11 +172,11 @@
         <option value="$PROJECT_DIR$/aarong/static/App/app.js" />
         <option value="$PROJECT_DIR$/aarong/admin.py" />
         <option value="$PROJECT_DIR$/aarong/models.py" />
-        <option value="$PROJECT_DIR$/aarong/templates/app/index.html" />
-        <option value="$PROJECT_DIR$/aarong/templates/app/SaleReport.html" />
         <option value="$PROJECT_DIR$/aarong/templates/app/sidebar.html" />
         <option value="$PROJECT_DIR$/brac_arong/urls.py" />
+        <option value="$PROJECT_DIR$/aarong/templates/app/index.html" />
         <option value="$PROJECT_DIR$/aarong/views.py" />
+        <option value="$PROJECT_DIR$/aarong/templates/app/SaleReport.html" />
       </list>
     </option>
   </component>
@@ -197,6 +217,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -204,12 +226,34 @@
               <item name="brac_arong" type="b2602c69:ProjectViewProjectNode" />
               <item name="brac_arong" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="brac_arong" type="b2602c69:ProjectViewProjectNode" />
+              <item name="brac_arong" type="462c0819:PsiDirectoryNode" />
+              <item name="aarong" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="brac_arong" type="b2602c69:ProjectViewProjectNode" />
+              <item name="brac_arong" type="462c0819:PsiDirectoryNode" />
+              <item name="aarong" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="brac_arong" type="b2602c69:ProjectViewProjectNode" />
+              <item name="brac_arong" type="462c0819:PsiDirectoryNode" />
+              <item name="aarong" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="brac_arong" type="b2602c69:ProjectViewProjectNode" />
+              <item name="brac_arong" type="462c0819:PsiDirectoryNode" />
+              <item name="aarong" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -243,8 +287,8 @@
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
-        <env name="DJANGO_SETTINGS_MODULE" value="brac_arong.settings" />
         <env name="PYTHONUNBUFFERED" value="1" />
+        <env name="DJANGO_SETTINGS_MODULE" value="brac_arong.settings" />
       </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="" />
@@ -311,14 +355,15 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.11513859" sideWeight="0.4945055" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.116204694" sideWeight="0.4945055" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3288889" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1641791" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3288889" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3288889" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.29222223" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27888888" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25266525" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.13444445" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.14072494" sideWeight="0.50549453" order="2" side_tool="true" content_ui="tabs" />
@@ -598,7 +643,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="391">
           <caret line="23" column="0" lean-forward="false" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -606,22 +650,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/aarong/templates/app/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2295">
-          <caret line="135" column="460" lean-forward="false" selection-start-line="135" selection-start-column="16" selection-end-line="135" selection-end-column="460" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/aarong/templates/app/SaleReport.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4182">
-          <caret line="246" column="51" lean-forward="false" selection-start-line="246" selection-start-column="51" selection-end-line="246" selection-end-column="51" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -644,13 +672,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="493">
           <caret line="29" column="92" lean-forward="false" selection-start-line="29" selection-start-column="12" selection-end-line="29" selection-end-column="108" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/brac_arong/urls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="416">
+        <state relative-caret-position="680">
           <caret line="46" column="55" lean-forward="false" selection-start-line="46" selection-start-column="55" selection-end-line="46" selection-end-column="55" />
           <folding />
         </state>
@@ -666,7 +693,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/aarong/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="42">
+        <state relative-caret-position="663">
           <caret line="43" column="11" lean-forward="false" selection-start-line="43" selection-start-column="4" selection-end-line="43" selection-end-column="11" />
           <folding>
             <element signature="e#0#28#0" expanded="true" />
@@ -676,7 +703,7 @@
     </entry>
     <entry file="file://$USER_HOME$/Envs/aos/Lib/site-packages/django/contrib/auth/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="118">
+        <state relative-caret-position="6256">
           <caret line="383" column="12" lean-forward="false" selection-start-line="383" selection-start-column="4" selection-end-line="383" selection-end-column="12" />
           <folding />
         </state>
@@ -684,11 +711,27 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/aarong/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="212">
-          <caret line="28" column="21" lean-forward="false" selection-start-line="28" selection-start-column="4" selection-end-line="28" selection-end-column="21" />
+        <state relative-caret-position="488">
+          <caret line="702" column="0" lean-forward="true" selection-start-line="702" selection-start-column="0" selection-end-line="702" selection-end-column="0" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/aarong/templates/app/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="329">
+          <caret line="134" column="43" lean-forward="true" selection-start-line="134" selection-start-column="16" selection-end-line="134" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/aarong/templates/app/SaleReport.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="194" column="14" lean-forward="true" selection-start-line="194" selection-start-column="14" selection-end-line="194" selection-end-column="14" />
+          <folding />
         </state>
       </provider>
     </entry>

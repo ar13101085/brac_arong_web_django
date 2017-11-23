@@ -681,6 +681,21 @@ def GetMarketAnalysis(request):
     for x in color:
         colorData.append(x.code);
 
+    idx=0;
+
+    for x in listTotal:
+        print(str(x)+" "+nameList[idx]+" "+str(idx))
+        if x == 0:
+            del vendor[nameList[idx]]
+            nameList.pop(idx);
+            #listTotal.pop(idx);
+            continue;
+        idx=idx+1;
+
+    while 0 in listTotal: listTotal.remove(0);
+
+
+
     vendor['name'] = nameList;
     vendor['date'] = dateList;
     vendor['color'] = colorData;
